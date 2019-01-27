@@ -1,6 +1,5 @@
 var http = require('http');
 var url = require('url');
-var stringDecoder = require('string_decoder').StringDecoder;
 
 var responseObject = {
     "response": {
@@ -13,15 +12,11 @@ var responseObject = {
 
 http.createServer(function(request, response){
 
-    var decoder = new stringDecoder('utf-8');
-    var payload = '';
     var parsedUrl = url.parse(request.url, true);
     var path = parsedUrl.pathname;
-    var responseMessage = {}
-    let body = [];
 
     path == "/hello" && request.method.toLowerCase() === 'post' ?
-      responseObject = {"response": {"success": true, "code": 200,"status": "OK", "message": "Payload received"}}
+      responseObject = {"response": {"success": true, "code": response.statusCode ,"status": "OK", "message": "Payload received"}}
       :
       responseObject
 
